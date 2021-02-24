@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+</head>
+<body>
+<th:block th:include="~{/fragments/nav-bar}"></th:block>
+<main class="main">
+    <div class="container mt-2 border">
+        <p class="mt-4"
+           style="text-align: center; font-family: 'Calibri Light'; font-size: 18px; font-weight: bold; background-color: #fffbe0">
+            Попълването на маркираните с * полета е задължително за завършване на регистрацията. Моля, попълнете ги
+            коректно.</p>
+        <div class="row">
+            <div class="col-md-6 py-5">
+                <div class=" ">
+                    <div class="card-body border"
+                         style="background: linear-gradient(90deg, rgba(2,120,37,1) 0%, rgba(104,181,91,1) 100%); border-radius: 15px">
+                        <h5 style="color: white"><i style="color: white" class="fa fa-check-circle fa-1x mr-4"></i>Откриите
+                            подходящите кандидати</h5>
+                        <h5 style="color: white"><i style="color: white" class="fa fa-check-circle fa-1x mr-4"></i>Бърза
+                            и лесна регистрация</h5>
+                        <h5 style="color: white"><i style="color: white" class="fa fa-check-circle fa-1x mr-4"></i>Всяка
+                            обява получава между 10 и 20 кандидатури</h5>
+                        <h5 style="color: white"><i style="color: white" class="fa fa-check-circle fa-1x mr-4"></i>Публикувайте
+                            и управлявайте вашите обяви за работа и кандидатурите по тях</h5>
+                        <h5 style="color: white"><i style="color: white" class="fa fa-check-circle fa-1x mr-4"></i>Публикуването
+                            на обяви е напълно безплатно</h5>
+                        <h5 style="color: white"><i style="color: white" class="fa fa-check-circle fa-1x mr-4"></i>Подреждайте
+                            и организирайте кандидатурите</h5>
+                    </div>
+                    <div class="container">
+                        <h5>Необходима Ви е помощ?</h5>
+                        <p>Можете да се свържете с нас всеки делничен ден от 8:30 до 17:30<br>
+                            <i class="fa fa-phone mr-2"></i>Тел: +123456789<br>
+                            <i class="fa fa-envelope mr-2"></i>Email: example@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 py-5">
+                <p style="font-family: 'Calibri Light'; padding-left: 28%; font-weight: bold; font-size: 30px">
+                    Потребител</p>
+                <form>
+                    <div class="row" style="padding-left: 30%">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">Име*</label>
+                            <input id="firstName" name="firstName" placeholder="Thomas" class="form-control"
+                                   type="text" style="width: 150%">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-left: 30%">
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Фамилия*</label>
+                            <input id="lastName" name="lastName" placeholder="Smith" class="form-control" type="text"
+                                   style="width: 150%">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-left: 30%">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Имейл*</label>
+                            <input id="email" name="email" placeholder="thomas@smith.com" class="form-control"
+                                   type="email" style="width: 150%">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-left: 30%">
+                        <div class="form-group">
+                            <label for="password" class="form-label">Парола*</label>
+                            <input id="password" name="password" class="form-control" type="password"
+                                   style="width: 150%">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-left: 30%">
+                        <div class="form-group">
+                            <label for="confirmPassword" class="form-label">Потвърдете паролата*</label>
+                            <input id="confirmPassword" name="confirmPassword" class="form-control" type="password"
+                                   style="width: 150%">
+                        </div>
+                    </div>
+                    <div class="form-row" style="padding-left: 30%">
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                                <label class="form-check-label" for="invalidCheck2">
+                                    <small>Съгласен съм с условията за ползване, политиката за защита на лични данни и
+                                        политика за ползване на бисквити</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-left: 30%">
+                        <button type="button" class="btn btn-outline-dark " style="width: 50%">Регистрация</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

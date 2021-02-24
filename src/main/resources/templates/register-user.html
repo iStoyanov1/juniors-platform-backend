@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<th:block th:include="~{/fragments/nav-bar}"></th:block>
+<main class="main">
+    <div class="container mt-2">
+        <div class="row ">
+            <div class="col-md-4 py-5 text-white text-center"
+                 style="background-image: url(https://i.pinimg.com/originals/53/0a/74/530a746087d021696f38e010ff8c3112.jpg); background-size: cover; background-attachment: fixed; background-position: left">
+                <div class=" ">
+                    <h2>Company name</h2>
+                    <div class="card-body" style="padding-top: 80%">
+                        <h3 style="font-family: 'Calibri Light'; font-weight: bold; font-size: 30px">
+                            Намерете работа в една от най-добрите технологични компании в България.
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 py-5 border">
+                <p style="font-family: 'Calibri Light'; padding-left: 28%; font-weight: bold; font-size: 30px">
+                    Потребител</p>
+                <form id="submit-form"  th:action="@{/api/register/user}" th:method="post">
+                    <div class="row" style="padding-left: 30%">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">Име*</label>
+                            <input id="firstName" name="firstName" placeholder="Thomas" class="form-control"
+                                   type="text" required style="width: 320px">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-left: 30%">
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Фамилия*</label>
+                            <input id="lastName" name="lastName" placeholder="Smith" class="form-control" type="text"
+                                   required style="width: 320px">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-left: 30%">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Имейл*</label>
+                            <input id="email" name="email" placeholder="thomas@smith.com"
+                                   class="form-control"
+                                   type="text" style="width: 320px">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-left: 30%">
+                        <div class="form-group">
+                            <label for="password" class="form-label">Парола*</label>
+                            <input id="password" name="password" class="form-control" type="password"
+                                   style="width: 320px">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-left: 30%">
+                        <div class="form-group">
+                            <label for="confirmPassword" class="form-label">Потвърдете паролата*</label>
+                            <input id="confirmPassword" name="confirmPassword" class="form-control" type="password"
+                                   style="width: 320px">
+                        </div>
+                    </div>
+                    <div class="form-row" style="padding-left: 30%">
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="privacyCheck" required>
+                                <label class="form-check-label" for="privacyCheck">
+                                    <small>Съгласен съм с условията за ползване, политиката за защита на лични данни и
+                                        политика за ползване на бисквити</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-left: 30%">
+                        <button disabled="disabled" id="submit-button" type="submit"
+                                class="btn btn-submit btn-outline-dark submit-btn"
+                                style="width: 50%">Създай
+                            профил
+                        </button>
+                    </div>
+                </form>
+                <p class="mt-4"
+                   style="text-align: center; font-family: 'Calibri Light'; font-size: 18px; font-weight: bold; background-color: #fffbe0">
+                    Попълването на маркираните с * полета е задължително за завършване на регистрацията. Моля, попълнете
+                    ги
+                    коректно.</p>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script>
+    $.validator.addMethod("regex",
+        function (value, element, regexp) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
+        }, "Please check your input."
+    );
+    $(document).ready(function () {
+        $("#submit-form").validate({
+            rules: {
+                firstName: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 14,
+                    regex: "([А-Я][а-я]+)"
+                },
+                lastName: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 20,
+                    regex: "([А-Я][а-я]+)"
+                },
+                email: {
+                    required: true,
+                    regex: "^([\\w\\.\\-]+)@([\\w\\-]+)(\\D(\\.(\\w){2,3})+)$",
+                },
+                password: {
+                    required: true,
+                    regex: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
+                },
+                confirmPassword: {
+                    required: true,
+                    regex: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
+                    equalTo: "#password"
+                }
+            },
+            messages: {
+                firstName: {
+                    required: "Полето е задължително",
+                    minlength: "Името трябва да започва с главна буква, да е между 2-14 символа и да е на български",
+                    maxlength: "Името трябва да започва с главна буква, да е между 2-14 символа и да е на български",
+                    regex: "Името трябва да започва с главна буква, да е между 2-14 символа и да е на български"
+                },
+                lastName: {
+                    required: "Полето е задължително",
+                    minlength: "Фамилилята трябва да започва с главна буква, да е между 2-20 символа и да е на български",
+                    maxlength: "Фамилилята трябва да започва с главна буква, да е между 2-20 символа и да е на български",
+                    regex: "Фамилилята трябва да започва с главна буква, да е между 2-20 символа и да е на български"
+                },
+                email: {
+                    required: "Полето е задължително",
+                    regex: "Неправилен имейл адрес"
+                },
+                password: {
+                    required: "Полето е задължително",
+                    regex: "Паролата трябва да съдържа: \nМинимум 8 символа.\n " +
+                        "Поне една малка буква.\n" +
+                        "Поне една цифра."
+                },
+                confirmPassword: {
+                    required: "Полето е задължително",
+                    regex: "Паролата трябва да съдържа: \nМинимум 8 символа.\n " +
+                        "Поне една малка буква.\n" +
+                        "Поне една цифра.",
+                    equalTo: "Паролите не съвпадат"
+                }
+            },
+
+        });
+    });
+
+    $('.form-control').on('keyup blur', function (e) {
+        if ($('#firstName').valid() && $('#lastName').valid() && $('#email').valid() && $('#password').valid()
+            && $('#confirmPassword').valid()) {
+            $('#privacyCheck').on('change', function () {
+                if ($('#privacyCheck').is(':checked')) {
+                    $('button.btn').prop('disabled', false);
+                } else {
+                    $('button.btn').prop('disabled', true);
+                }
+            })
+        } else {
+            $('#privacyCheck').on('change', function () {
+                if ($('#privacyCheck').is(':checked')) {
+                    $('button.btn').prop('disabled', true);
+                } else {
+                    $('button.btn').prop('disabled', true);
+                }
+            })
+        }
+    });
+
+    $('#submit-form').submit(function (){
+        window.location = '/register/user'
+    })
+</script>
