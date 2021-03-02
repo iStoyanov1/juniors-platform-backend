@@ -12,6 +12,7 @@ public class Company extends BaseEntity {
     private byte[] logo;
     private long bulstat;
     private List<JobOffer> jobOffers;
+    private Auth auth;
 
     public Company() {
     }
@@ -50,6 +51,15 @@ public class Company extends BaseEntity {
 
     public void setJobOffers(List<JobOffer> jobOffers) {
         this.jobOffers = jobOffers;
+    }
+
+    @OneToOne
+    public Auth getAuth() {
+        return auth;
+    }
+
+    public void setAuth(Auth auth) {
+        this.auth = auth;
     }
 }
 

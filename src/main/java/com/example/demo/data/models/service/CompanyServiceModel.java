@@ -7,12 +7,21 @@ import java.util.List;
 
 public class CompanyServiceModel extends BaseServiceModel {
 
+    private AuthServiceModel authServiceModel;
     private String name;
     private byte[] logo;
     private long bulstat;
     private List<JobOfferServiceModel> jobOffers;
 
     public CompanyServiceModel() {
+    }
+
+    public AuthServiceModel getAuthServiceModel() {
+        return authServiceModel;
+    }
+
+    public void setAuthServiceModel(AuthServiceModel authServiceModel) {
+        this.authServiceModel = authServiceModel;
     }
 
     public String getName() {

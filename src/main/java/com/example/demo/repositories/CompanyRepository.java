@@ -7,4 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, String> {
+
+
 }

@@ -11,9 +11,9 @@ public class CompanyRegisterDto {
     private String email;
     private String phone;
 
-    private String companySignInEmail;
-    private String companySignInPassword;
-    private String companySignInConfirmPassword;
+    private String username;
+    private String password;
+    private String confirmPassword;
 
     public CompanyRegisterDto() {
     }
@@ -74,27 +74,27 @@ public class CompanyRegisterDto {
         this.phone = phone;
     }
 
-    public String getCompanySignInEmail() {
-        return companySignInEmail;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCompanySignInEmail(String companySignInEmail) {
-        this.companySignInEmail = companySignInEmail;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getCompanySignInPassword() {
-        return companySignInPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCompanySignInPassword(String companySignInPassword) {
-        this.companySignInPassword = companySignInPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getCompanySignInConfirmPassword() {
-        return companySignInConfirmPassword;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setCompanySignInConfirmPassword(String companySignInConfirmPassword) {
-        this.companySignInConfirmPassword = companySignInConfirmPassword;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

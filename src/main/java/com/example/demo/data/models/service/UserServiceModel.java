@@ -13,19 +13,25 @@ import java.util.Set;
 
 public class UserServiceModel extends BaseServiceModel {
 
+    private AuthServiceModel authServiceModel;
     private String firstName;
     private String lastName;
-    private String email;
-    private String password;
     private String description;
     private String phone;
     private byte[] file;
     private List<CompanyServiceModel> companies;
     private List<TechnologyServiceModel> technologies;
-    private Set<RoleServiceModel> authorities;
     private JobOfferServiceModel jobOffer;
 
     public UserServiceModel() {
+    }
+
+    public AuthServiceModel getAuthServiceModel() {
+        return authServiceModel;
+    }
+
+    public void setAuthServiceModel(AuthServiceModel authServiceModel) {
+        this.authServiceModel = authServiceModel;
     }
 
     public String getFirstName() {
@@ -43,22 +49,6 @@ public class UserServiceModel extends BaseServiceModel {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getDescription() {
@@ -99,14 +89,6 @@ public class UserServiceModel extends BaseServiceModel {
 
     public void setTechnologies(List<TechnologyServiceModel> technologies) {
         this.technologies = technologies;
-    }
-
-    public Set<RoleServiceModel> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<RoleServiceModel> authorities) {
-        this.authorities = authorities;
     }
 
     public JobOfferServiceModel getJobOffer() {
