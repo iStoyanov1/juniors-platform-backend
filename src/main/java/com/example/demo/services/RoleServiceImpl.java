@@ -26,9 +26,9 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void saveRole() {
         if (this.roleRepository.count() == 0) {
-            this.roleRepository.saveAndFlush(new Role("MODERATOR"));
-            this.roleRepository.saveAndFlush(new Role("USER"));
-            this.roleRepository.saveAndFlush(new Role("COMPANY"));
+            this.roleRepository.saveAndFlush(new Role("ROLE_MODERATOR"));
+            this.roleRepository.saveAndFlush(new Role("ROLE_USER"));
+            this.roleRepository.saveAndFlush(new Role("ROLE_COMPANY"));
         }
     }
 

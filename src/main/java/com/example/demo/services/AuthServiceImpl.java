@@ -51,12 +51,23 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public boolean findByUsername(String username) {
+    public boolean checkUsernameExist(String username) {
         Auth findAuthByUsername = this.authRepository.findByUsername(username);
 
         if (findAuthByUsername == null){
             return false;
         }
         return true;
+    }
+
+    @Override
+    public AuthServiceModel findByUsername(String username) {
+        Auth findAuthByUsername = this.authRepository.findByUsername(username);
+
+        if (findAuthByUsername == null){
+            throw new IllegalArgumentException("Потребител с такъв имейл не същестувува.");
+        }
+
+        return this.modelMapper.map(findAuthByUsername, AuthServiceModel.class);
     }
 }

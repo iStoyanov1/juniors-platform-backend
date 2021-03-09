@@ -18,7 +18,7 @@ public class UserServiceModel extends BaseServiceModel {
     private String lastName;
     private String description;
     private String phone;
-    private byte[] file;
+    private FileServiceModel file;
     private List<CompanyServiceModel> companies;
     private List<TechnologyServiceModel> technologies;
     private JobOfferServiceModel jobOffer;
@@ -67,11 +67,11 @@ public class UserServiceModel extends BaseServiceModel {
         this.phone = phone;
     }
 
-    public byte[] getFile() {
+    public FileServiceModel getFile() {
         return file;
     }
 
-    public void setFile(byte[] file) {
+    public void setFile(FileServiceModel file) {
         this.file = file;
     }
 

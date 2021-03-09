@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -30,18 +31,28 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        System.out.println();
         try {
             AuthLoginDto authLoginDto = new ObjectMapper()
                     .readValue(request.getInputStream(), AuthLoginDto.class);
 
-            return this.authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            authLoginDto.getUsername(),
-                            authLoginDto.getPassword(),
-                            new ArrayList<>())
-            );
+            Authentication authenticate = null;
+
+            try {
+
+                authenticate = this.authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                authLoginDto.getUsername(),
+                                authLoginDto.getPassword(),
+                                new ArrayList<>()));
+
+            return authenticate;
+
+            }catch (BadCredentialsException e){
+                throw new IllegalArgumentException("Няма намерен потребител.");
+            }
         } catch (IOException ignored) {
-            return null;
+            throw new IllegalArgumentException("Няма намерен потребител.");
         }
     }
 
@@ -62,7 +73,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .signWith(SignatureAlgorithm.HS256, "Secret".getBytes())
                 .compact();
 
-//        response.addHeader("Authorization", "Bearer " + token);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(

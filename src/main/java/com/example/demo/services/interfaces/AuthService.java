@@ -10,5 +10,7 @@ public interface AuthService extends UserDetailsService {
 
     AuthServiceModel findAuthById(String id);
 
-    boolean findByUsername(String username);
+    boolean checkUsernameExist(String username);
+
+    AuthServiceModel findByUsername(String username);
 }

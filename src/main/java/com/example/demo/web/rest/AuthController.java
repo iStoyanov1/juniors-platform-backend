@@ -36,12 +36,11 @@ public class AuthController {
         this.userService = userService;
     }
 
-
     @PostMapping("/api/register/user")
     @CrossOrigin
     public void createUser(@RequestBody UserRegisterDto userRegisterDto) {
-
-        if (this.authService.findByUsername(userRegisterDto.getUsername())){
+        System.out.printf("t");
+        if (this.authService.checkUsernameExist(userRegisterDto.getUsername())){
             throw new IllegalArgumentException("Вече съществува потребител с такъв имейл.");
         }
 
@@ -93,7 +92,7 @@ public class AuthController {
         if (this.companyAdministrativeInfoService.checkEmail(administrativeEmail))
         {
             throw new IllegalArgumentException("Имейлът " + administrativeEmail + " вече съществува в системата. Моля опитайте с друг.");
-        }else if (this.authService.findByUsername(username)){
+        }else if (this.authService.checkUsernameExist(username)){
             throw new IllegalArgumentException("Имейлът " + username + " вече съществува в системата. Моля опитайте с друг.");
         }
     }

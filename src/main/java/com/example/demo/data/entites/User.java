@@ -14,10 +14,10 @@ public class User extends BaseEntity{
 
     private String firstName;
     private String lastName;
-    private byte[] file;
     private List<Technology> technologies;
     private List<JobOffer> jobOffers;
     private Auth auth;
+    private File file;
 
     public User() {
     }
@@ -39,16 +39,6 @@ public class User extends BaseEntity{
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    @Column(name = "file")
-    public byte[] getFile() {
-        return file;
-    }
-
-    public void setFile(byte[] file) {
-        this.file = file;
-    }
-
 
     @OneToMany(mappedBy = "user")
     public List<Technology> getTechnologies() {
@@ -75,5 +65,14 @@ public class User extends BaseEntity{
 
     public void setAuth(Auth auth) {
         this.auth = auth;
+    }
+
+    @OneToOne
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 }
