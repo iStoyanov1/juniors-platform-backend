@@ -12,4 +12,8 @@ public interface UserService {
 
     UserServiceModel uploadUserCV(UserServiceModel userServiceModel);
 
+    UserServiceModel editUserName(String id, String firstName, String lastName);
+
+
+    void editUserPassword(String id, String password);
 }

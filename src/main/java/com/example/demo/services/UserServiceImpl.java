@@ -49,14 +49,14 @@ public class UserServiceImpl implements UserService{
         User user = this.modelMapper.map(userServiceModel, User.class);
 
         if (userRepository.count() == 0){
-            userServiceModel.getAuthServiceModel().setAuthorities(new LinkedHashSet<>());
-            userServiceModel.getAuthServiceModel().getAuthorities().add(this.roleService.findByAuthority("ROLE_MODERATOR"));
+            userServiceModel.getAuth().setAuthorities(new LinkedHashSet<>());
+            userServiceModel.getAuth().getAuthorities().add(this.roleService.findByAuthority("ROLE_MODERATOR"));
         }else{
-            userServiceModel.getAuthServiceModel().setAuthorities(new LinkedHashSet<>());
-            userServiceModel.getAuthServiceModel().getAuthorities().add(this.roleService.findByAuthority("ROLE_USER"));
+            userServiceModel.getAuth().setAuthorities(new LinkedHashSet<>());
+            userServiceModel.getAuth().getAuthorities().add(this.roleService.findByAuthority("ROLE_USER"));
         }
 
-        Auth auth = this.modelMapper.map(userServiceModel.getAuthServiceModel(), Auth.class);
+        Auth auth = this.modelMapper.map(userServiceModel.getAuth(), Auth.class);
 
         this.authRepository.saveAndFlush(auth);
         return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
@@ -81,5 +81,34 @@ public class UserServiceImpl implements UserService{
         user.setFile(file);
 
         return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
+    }
+
+    @Override
+    public UserServiceModel editUserName(String id, String firstName, String lastName) {
+        User user = this.userRepository.findById(id).orElse(null);
+
+        if (user == null){
+            throw new IllegalArgumentException("Няма намерен потребител!");
+        }
+
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+
+        return this.modelMapper.map(this.userRepository.save(user), UserServiceModel.class);
+    }
+
+    @Override
+    public void editUserPassword(String id, String password) {
+        User user = this.userRepository.findById(id).orElse(null);
+
+        if (user == null){
+            throw new IllegalArgumentException("Няма намерен потребител!");
+        }
+
+        user.getAuth().setPassword(this.bCryptPasswordEncoder.encode(password));
+
+        this.userRepository.save(user);
+
+
     }
 }

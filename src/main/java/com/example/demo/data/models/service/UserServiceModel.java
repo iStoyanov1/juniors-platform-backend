@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class UserServiceModel extends BaseServiceModel {
 
-    private AuthServiceModel authServiceModel;
+    private AuthServiceModel auth;
     private String firstName;
     private String lastName;
     private String description;
@@ -26,12 +26,12 @@ public class UserServiceModel extends BaseServiceModel {
     public UserServiceModel() {
     }
 
-    public AuthServiceModel getAuthServiceModel() {
-        return authServiceModel;
+    public AuthServiceModel getAuth() {
+        return auth;
     }
 
-    public void setAuthServiceModel(AuthServiceModel authServiceModel) {
-        this.authServiceModel = authServiceModel;
+    public void setAuth(AuthServiceModel auth) {
+        this.auth = auth;
     }
 
     public String getFirstName() {

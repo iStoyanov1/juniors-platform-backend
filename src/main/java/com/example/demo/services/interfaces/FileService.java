@@ -9,4 +9,6 @@ public interface FileService {
     FileServiceModel uploadFile(FileServiceModel file);
 
     FileServiceModel getFileById(String id);
+
+    void deleteFileById(String userId, String fileId);
 }

@@ -51,7 +51,7 @@ public class AuthController {
                         AuthServiceModel.class));
 
         UserServiceModel user = this.modelMapper.map(userRegisterDto, UserServiceModel.class);
-        user.setAuthServiceModel(authServiceModel);
+        user.setAuth(authServiceModel);
         userService.registerUser(user);
 
     }

@@ -67,7 +67,7 @@ public class User extends BaseEntity{
         this.auth = auth;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     public File getFile() {
         return file;
     }

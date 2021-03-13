@@ -3,8 +3,10 @@ package com.example.demo.web.filters;
 import com.example.demo.data.entites.Auth;
 import com.example.demo.data.models.dtos.AuthLoginDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.commons.fileupload.MultipartStream;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,13 +47,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                 authLoginDto.getUsername(),
                                 authLoginDto.getPassword(),
                                 new ArrayList<>()));
+                return authenticate;
 
-            return authenticate;
-
-            }catch (BadCredentialsException e){
-                throw new IllegalArgumentException("Няма намерен потребител.");
+            }catch (AuthenticationException e){
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("{" +
+                        "   \"Няма намерен потребител\"}");
+                throw new IllegalArgumentException("Няма намерен потребител");
             }
         } catch (IOException ignored) {
+
             throw new IllegalArgumentException("Няма намерен потребител.");
         }
     }
@@ -66,13 +72,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .orElse(null))
                 .getAuthority();
 
-        String token = Jwts.builder()
-                .setSubject(auth.getUsername())
-                .setExpiration(new Date(System.currentTimeMillis() + 1200000))
-                .claim("role", authority)
-                .signWith(SignatureAlgorithm.HS256, "Secret".getBytes())
-                .compact();
-
+        String token = "";
+        try {
+           token = Jwts.builder()
+                    .setSubject(auth.getUsername())
+                    .setExpiration(new Date(System.currentTimeMillis() + 21600000))
+                    .claim("role", authority)
+                    .signWith(SignatureAlgorithm.HS256, "Secret".getBytes())
+                    .compact();
+        }catch (ExpiredJwtException jwt){
+            throw new IllegalArgumentException("Сесията Ви е изтекла. Моля влезте отново в профила си.");
+        }
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(

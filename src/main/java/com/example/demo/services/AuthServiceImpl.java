@@ -42,7 +42,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return this.authRepository.findByUsername(username);
+        return this.authRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
     }
 
     @Override
@@ -52,7 +53,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public boolean checkUsernameExist(String username) {
-        Auth findAuthByUsername = this.authRepository.findByUsername(username);
+        Auth findAuthByUsername = this.authRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));;
 
         if (findAuthByUsername == null){
             return false;
@@ -62,7 +64,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthServiceModel findByUsername(String username) {
-        Auth findAuthByUsername = this.authRepository.findByUsername(username);
+        Auth findAuthByUsername = this.authRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));;
 
         if (findAuthByUsername == null){
             throw new IllegalArgumentException("Потребител с такъв имейл не същестувува.");
